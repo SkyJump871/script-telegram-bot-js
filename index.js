@@ -10,7 +10,7 @@ const bot = new Telegraf(config.token)
 let commands = new Collection();
 let commandsFiles = fs.readdirSync('./plugin/commands/').filter(file => file.endsWith('.js'))
 for (let file of commandsFiles) {
-    const command = require(`./plugin/commands/${file}`)
+    const command = require(`./plugin/commands/${file}` || `./plugin/commands/downloader/${file}`)
     let name = command.name
     commands.set(name, command)
 }
@@ -27,7 +27,7 @@ bot.on('message', (ctx) => {
     if (!cmd) return;
     if (message.from.is_bot) return
     try {
-        console.log(`Running Commands: ${commandsName} for ${message.chat.username}`)
+        console.log(`Running Commands: ${commandsName} for ${message.chat.username || message.from.username}`)
         cmd.execute(ctx, message, args, bot)
     } catch (error) {
         console.log("Error:", error)
