@@ -1,37 +1,53 @@
-const {
-    Telegraf
-} = require('telegraf')
-const Collection = require('./lib/Collection')
+const { spawn } = require('child_process')
+const path = require('path')
 const fs = require('fs')
-const config = require('./config.json')
-const bot = new Telegraf(config.token)
+const package = require('./package.json')
+const figlet = require('figlet')
+const { color } = require('./function')
+const { loadAllDirFiles } = require('./function/loader')
 
-// Handling Commands Files
-let commands = new Collection();
-let commandsFiles = fs.readdirSync('./plugin/commands/').filter(file => file.endsWith('.js'))
-for (let file of commandsFiles) {
-    const command = require(`./plugin/commands/${file}` || `./plugin/commands/downloader/${file}`)
-    let name = command.name
-    commands.set(name, command)
+// Headers
+console.log(color(figlet.textSync('RF Bot', 'Banner3-D'), 'cyan'))
+// Info Bot
+console.log(color('Author:', 'yellow'), color(package.author))
+console.log(color('Version:', 'yellow'), color(package.version))
+console.log(color('Commands:', 'yellow'), color(loadAllDirFiles('./commands').length))
+console.log(color('Function:', 'yellow'), color(loadAllDirFiles('./function').length))
+console.log(color('Database:', 'yellow'), color(loadAllDirFiles('./database').length))
+console.log(color('Packages:', 'yellow'), color(loadAllDirFiles('./node_modules').length))
+
+// Continue to handler.js
+let isRun = false;
+
+function starts(files) {
+    if (isRun) return
+    isRun = true
+    let args = [path.join(__dirname, files), ...process.argv.slice(2)]
+    let sp = spawn(process.argv[0], args, {
+        stdio: ['inherit', 'inherit', 'inherit', 'ipc']
+    })
+    sp.on('message', (data) => {
+        console.log(color('[RECIEVED]', 'yellow'), color(data))
+        switch(data) {
+            case 'reset':
+                sp.kill()
+                isRun = false
+                starts.apply(this, arguments)
+            break
+            case 'uptime':
+                sp.send(process.uptime())
+            break
+        }
+    })
+    sp.on('exit', (code) => {
+        isRun = false
+        console.error('Exited with code:', code)
+        if (code === 0) return
+        fs.watchFile(args[0], () => {
+            fs.unwatchFile(args[0])
+            starts(files)
+        })
+    })
 }
 
-// Variable Settings
-const prefix = config.prefix
-
-bot.on('message', (ctx) => {
-    const message = ctx.message
-    const body = message.text ? message.text : message.text
-    const args = body.trim().split(/ +/).slice(prefix.length)
-    const commandsName = body.slice(prefix.length).trim().split(/ +/).shift().toLowerCase()
-    const cmd = commands.get(commandsName) || commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandsName))
-    if (!cmd) return;
-    if (message.from.is_bot) return
-    try {
-        console.log(`Running Commands: ${commandsName} for ${message.chat.username || message.from.username}`)
-        cmd.execute(ctx, message, args, bot)
-    } catch (error) {
-        console.log("Error:", error)
-    }
-})
-
-bot.launch();
+starts('handler.js')
