@@ -1,4 +1,4 @@
-const { getFromId, getMessageId } = require("../function/get")
+const { getFromId, getMessageId, getChatId } = require("../function/get")
 
 module.exports = {
     name: 'ping',
@@ -7,7 +7,7 @@ module.exports = {
     category: 'Basic',
     usage: 'send /ping',
     execute(bot, message, args) {
-        bot.sendMessage(getFromId(message), "Pong!", {
+        bot.sendMessage(getChatId(message), "Pong!", {
             reply: getMessageId(message),
             parse: 'markdown'
         })

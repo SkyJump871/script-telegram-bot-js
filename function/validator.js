@@ -1,3 +1,4 @@
+const config = require('../config.json')
 /**
  * Check is Group or not
  * @param {*} message 
@@ -16,7 +17,12 @@ const isUrl = (url) => {
     return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/gi))
 }
 
+const isOwner = (username) => {
+    return username == config.ownerUsername ? true : false
+}
+
 module.exports = {
     isGroup,
     isUrl,
+    isOwner
 }

@@ -7,8 +7,9 @@ module.exports = {
     description: "Send list Features or Menu bot",
     category: 'Guide',
     execute(bot, message, args) {
+        console.log(message)
         let commandsList = fs.readdirSync('./commands/').filter(list => list.endsWith('.js'))
-        let menulist = `|=====| *VenBot* *Menu* |=====|\n*Version*: ${package.version}\n*Prefix*: */*\n*Total Features*: __${commandsList.length}__\n\n`;
+        let menulist = `|=====| *RF* *Bot* |=====|\n*Version*: ${package.version}\n*Prefix*: */*\n*Total Features*: __${commandsList.length}__\n\n`;
         let no = 0;
         for (let file of commandsList) {
             const command = require(`./${file}`)

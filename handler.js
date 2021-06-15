@@ -2,6 +2,8 @@ const Telebot = require('telebot')
 const Collection = require('./lib/Collection')
 const fs = require('fs')
 const config = require('./config.json')
+const { color } = require('./function')
+const { isGroup } = require('./function/validator')
 const bot = new Telebot({
     token: config.token
 })
@@ -25,9 +27,18 @@ bot.on('*', (message) => {
     const isCmd = body.startsWith(prefix)
     const cmds = commands.get(commandName) || commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
     if (!isCmd) return
+    if (!cmds) return
     if (message.from.is_bot) return
+
+    // Log
+    if (isGroup(message)) {
+        console.log(color('Running Commands:', 'yellow'), color(`${commandName}`),  `[${args.length}]`, 'from', color(message.from.username, 'cyan'), 'in', color(message.chat.title, 'cyan'))
+    }
+    if (!isGroup(message)) {
+        console.log(color('Running Commands:', 'yellow'), color(`${commandName}`),  `[${args.length}]`, 'from', color(message.from.username, 'cyan'))
+    }
+
     try {
-        console.log(`Running Commands: ${commandName} for ${message.from.username}`)
         cmds.execute(bot, message, args)
     } catch (error) {
         console.log("Error:", error)

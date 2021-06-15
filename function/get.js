@@ -3,7 +3,7 @@
  * @param {*} message 
  * @returns {number}
  */
-const getChatId = (message) => {
+ const getChatId = (message) => {
     return message.chat.id
 }
 
