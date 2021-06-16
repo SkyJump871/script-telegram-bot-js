@@ -5,13 +5,13 @@ const dir = JSON.parse(fs.readFileSync('../database/user.json'))
  * Add user to Database
  * @param {number} userId 
  * @param {string} userName 
- * @param {Date} date 
+ * @param {string} date 
  * @param {string} serial 
  */
 const addUserToDatabase = (userId, userName, date, serial) => {
     const obj = { id: userId, name: userName, date: date, serial: serial }
     dir.push(obj)
-    fs.writeFileSync(dir, JSON.stringify(obj, null, 2))
+    fs.writeFileSync('../database/user.json', JSON.stringify(obj, null, 2))
 }
 
 /**

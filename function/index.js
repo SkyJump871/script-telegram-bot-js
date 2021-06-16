@@ -61,7 +61,33 @@ const processTime = (timestamp, now) => {
     return moment.duration(now - moment(timestamp * 1000)).asSeconds()
 }
 
+const recentsCommands = new Set();
+
+/**
+ * Check is id filtered
+ * @param {number} id 
+ * @returns {boolean}
+ */
+const isFiltered = (id) => {
+    return !!recentsCommands.has(id)
+}
+
+/**
+ * Add id to filter
+ * @param {number} id 
+ */
+const addFilter = (id) => {
+    recentsCommands.add(id)
+    setTimeout(() => {
+        return recentsCommands.delete(id)
+    }, 5000);
+}
+
 module.exports = {
+    filter: {
+        addFilter,
+        isFiltered,
+    },
     color,
     randomNumber,
     processTime,
