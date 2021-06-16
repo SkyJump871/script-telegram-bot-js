@@ -26,19 +26,6 @@ function starts(files) {
     let sp = spawn(process.argv[0], args, {
         stdio: ['inherit', 'inherit', 'inherit', 'ipc']
     })
-    sp.on('message', (data) => {
-        console.log(color('[RECIEVED]', 'yellow'), color(data))
-        switch(data) {
-            case 'reset':
-                sp.kill()
-                isRun = false
-                starts.apply(this, arguments)
-            break
-            case 'uptime':
-                sp.send(process.uptime())
-            break
-        }
-    })
     sp.on('exit', (code) => {
         isRun = false
         console.error('Exited with code:', code)
