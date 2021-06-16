@@ -1,5 +1,5 @@
 const Telebot = require('telebot')
-const Collection = require('./lib/Collection')
+const Extra = require('@lendev0406/extramap')
 const fs = require('fs')
 const config = require('./config.json')
 const { color, filter } = require('./function')
@@ -10,7 +10,7 @@ const bot = new Telebot({
 })
 
 // Handling Commands Files
-let commands = new Collection();
+let commands = new Extra();
 let commandsFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'))
 for (let file of commandsFiles) {
     const command = require(`./commands/${file}`)
@@ -35,14 +35,14 @@ bot.on('*', async (message) => {
     // Cooldowns
     if (isCmd && filter.isFiltered(getFromId(message)) && !isGroup(message)) {
         console.log(color('Spam Commands:', 'red'), color(`${commandName}`), `[${args.length}]`, 'from', color(getUsername(message), 'cyan'))
-        return bot.sendMessage(getFromId(message), "Wait 5 seconds to request another commands", {
+        return bot.sendMessage(getChatId(message), "Wait 5 seconds to request another commands", {
             reply: getMessageId(message),
             parseMode: 'markdown'
         })
     }
     if (isCmd && filter.isFiltered(getFromId(message)) && isGroup(message)) {
         console.log(color('Spam Commands:', 'red'), color(`${commandName}`), `[${args.length}]`, 'from', color(getUsername(message), 'cyan'), 'in', color(getTitleGroup(message), 'cyan'))
-        return bot.sendMessage(getFromId(message), "Wait 5 seconds to request another commands", {
+        return bot.sendMessage(getChatId(message), "Wait 5 seconds to request another commands", {
             reply: getMessageId(message),
             parseMode: 'markdown'
         })
