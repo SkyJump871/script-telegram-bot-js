@@ -1,3 +1,6 @@
+const axios = require('axios').default
+const fs = require('fs')
+
 /**
  * Get Chat Id
  * @param {*} message 
@@ -41,6 +44,22 @@ const getFromId = (message) => {
  */
 const getMessageId = (message) => {
     return message.message_id
+}
+
+/**
+ * Get download files
+ * @param {string} fileId 
+ * @param {object} path 
+ */
+const getDownloadFiles = async (bot, fileId, path) => {
+    const validPath = path.endsWith('/') ? path : `${path}/`
+    const data = await bot.getFile(fileId)
+    const resultsPath = `${validPath}${data.file_unique_id}`
+    const dataFiles = await axios.get(data.fileLink, {
+        responseType: 'arraybuffer'
+    })
+    fs.writeFileSync(resultsPath, dataFiles.data)
+    return resultsPath
 }
 
 module.exports = {

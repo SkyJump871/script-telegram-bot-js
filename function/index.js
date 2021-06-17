@@ -83,6 +83,25 @@ const addFilter = (id) => {
     }, 5000);
 }
 
+/**
+ * Number to tier
+ * @param {number} number
+ * @returns {string} 
+ */
+const numberFormatting = (number) => {
+    const tierlist = ["", " Thousand", " Million", " Billion", " Trillion"]
+    const tier = Math.log10(Math.abs(number)) / 3 | 0
+    if (tier == 0) return number
+    let postfix = tierlist[tier]
+    let scale = Math.pow(10, tier * 3)
+    let scaled = number / scale
+    let formatted = scaled.toFixed(1) + ''
+    if (/\.0$/.test(formatted)) {
+        formatted = formatted.substr(0, formatted.length - 2)
+    }
+    return formatted + postfix
+}
+
 module.exports = {
     filter: {
         addFilter,
@@ -91,4 +110,5 @@ module.exports = {
     color,
     randomNumber,
     processTime,
+    numberFormatting,
 }

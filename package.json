@@ -1,6 +1,6 @@
 {
   "name": "rfbot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple Script Telegram Bot",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/LenDev0406/RFBot#readme",
   "dependencies": {
     "@lendev0406/extramap": "^0.0.1",
+    "axios": "^0.21.1",
     "chalk": "^4.1.1",
     "child_process": "^1.0.2",
     "figlet": "^1.5.0",
@@ -26,6 +27,7 @@
     "ms": "^2.1.3",
     "parse-ms": "^3.0.0",
     "path": "^0.12.7",
-    "telebot": "^1.4.1"
+    "telebot": "^1.4.1",
+    "ytdl-core": "^4.8.2"
   }
 }

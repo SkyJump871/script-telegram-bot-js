@@ -22,7 +22,8 @@ for (let file of commandsFiles) {
 const prefix = config.prefix
 
 bot.on('*', async (message) => {
-    const body = message.text
+    const { text, caption } = message
+    const body = text ? text : caption
     const commandName = body.slice(prefix.length).trim().split(/ +/).shift().toLowerCase()
     const args = body.trim().split(/ +/).slice(prefix.length)
     const isCmd = body.startsWith(prefix)

@@ -12,8 +12,9 @@ console.log(color(figlet.textSync('RF Bot', 'Banner3-D'), 'cyan'))
 console.log(color('Author:', 'yellow'), color(package.author))
 console.log(color('Version:', 'yellow'), color(package.version))
 console.log(color('Commands:', 'yellow'), color(loadAllDirFiles('./commands').length))
-console.log(color('Function:', 'yellow'), color(loadAllDirFiles('./function').length))
 console.log(color('Database:', 'yellow'), color(loadAllDirFiles('./database').length))
+console.log(color('Function:', 'yellow'), color(loadAllDirFiles('./function').length))
+console.log(color('Library:', 'yellow'), color(loadAllDirFiles('./lib').length))
 console.log(color('Packages:', 'yellow'), color(loadAllDirFiles('./node_modules').length))
 
 // Continue to handler.js
