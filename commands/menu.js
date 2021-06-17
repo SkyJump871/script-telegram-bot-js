@@ -3,12 +3,12 @@ const package = require('../package.json')
 module.exports = {
     name: 'menu',
     usage: "send /menu",
-    aliases: ['help', 'fitur', 'listfitur'],
+    aliases: ['help', 'guide'],
     description: "Send list Features or Menu bot",
     category: 'Guide',
     execute(bot, message, args) {
         let commandsList = fs.readdirSync('./commands/').filter(list => list.endsWith('.js'))
-        let menulist = `|=====| *RF* *Bot* |=====|\n*Version*: ${package.version}\n*Prefix*: */*\n*Total Features*: __${commandsList.length}__\n\n`;
+        let menulist = `*Name Bot*: RF\n*Version*: ${package.version}\n*Prefix*: */*\n*Total Features*: __${commandsList.length}__\n\n`;
         let no = 0;
         for (let file of commandsList) {
             const command = require(`./${file}`)

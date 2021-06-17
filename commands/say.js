@@ -4,7 +4,7 @@ module.exports = {
     name: 'say',
     usage: "send /say <text>",
     aliases: ['repeat'],
-    category: 'Basic',
+    category: 'Fun',
     description: "Repeat what are you writing",
     execute(bot, message, args) {
         const q = args.join(" ")
