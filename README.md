@@ -1,6 +1,6 @@
 # Installation
 
-## For Desktop / PC
+## For Desktop / PC (Linux)
 
 ```bash
 > sudo apt update
@@ -9,6 +9,12 @@
 > sudo npm install -g n
 > sudo n install stable
 ```
+
+# Requirements
+
+- NodeJs
+- Telegram bot token
+- Devices
 
 # Features
 
