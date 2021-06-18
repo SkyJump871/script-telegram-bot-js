@@ -27,6 +27,7 @@
 | :-: | :-------: | :-----: | :-----: |
 | Is | question | is | are |
 | Say | words | say | repeat |
+
 | Searcher | Parameter | Command | Aliases |
 | :------: | :-------: | :-----: | :-----: |
 | Youtube Music | title | play | ytmusic, ytplay, music |
