@@ -22,14 +22,14 @@
 | :---------: | :------: | :-----: |
 | List Features | menu | help, guide |
 
-| Searcher | Parameter | Command | Aliases |
-| :------: | :-------: | :-----: | :-----: |
-| Youtube Music | title | play | ytmusic, ytplay, music |
 
 | Fun | Parameter | Command | Aliases |
 | :-: | :-------: | :-----: | :-----: |
 | Is | question | is | are |
 | Say | words | say | repeat |
+| Searcher | Parameter | Command | Aliases |
+| :------: | :-------: | :-----: | :-----: |
+| Youtube Music | title | play | ytmusic, ytplay, music |
 
 | Downloader | Parameter | Command | Aliases |
 | :--------: | :-------: | :------: | :-----: |
