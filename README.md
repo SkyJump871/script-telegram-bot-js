@@ -1,14 +1,14 @@
 # Installation
 
-## for pc/deskstop user
+## For Desktop / PC
 
-"""bash
+```bash
 > sudo apt update
 > sudo apt upgrade
 > sudo apt install npm
 > sudo npm install -g n
 > sudo n install stable
-"""
+```
 
 # Features
 
