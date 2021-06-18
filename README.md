@@ -26,6 +26,7 @@
 | Bot | Command | Aliases |
 | :---------: | :------: | :-----: |
 | List Features | menu | help, guide |
+| Ping | ping | none |
 
 
 | Fun | Parameter | Command | Aliases |
