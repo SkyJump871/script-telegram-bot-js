@@ -5,7 +5,7 @@ module.exports = {
     usage: "send /menu",
     aliases: ['help', 'guide'],
     description: "Send list Features or Menu bot",
-    category: 'Guide',
+    category: 'Bot',
     execute(bot, message, args) {
         let commandsList = fs.readdirSync('./commands/').filter(list => list.endsWith('.js'))
         let menulist = `*Name Bot*: RF\n*Version*: ${package.version}\n*Prefix*: */*\n*Total Features*: __${commandsList.length}__\n\n`;

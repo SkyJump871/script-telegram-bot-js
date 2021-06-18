@@ -4,7 +4,7 @@ module.exports = {
     name: 'ping',
     aliases: ['pong'],
     description: "Send ping Messages",
-    category: 'Basic',
+    category: 'Bot',
     usage: 'send /ping',
     execute(bot, message, args) {
         bot.sendMessage(getChatId(message), "Pong!", {
