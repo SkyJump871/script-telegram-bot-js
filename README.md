@@ -5,9 +5,14 @@
 ```bash
 > sudo apt update
 > sudo apt upgrade
-> sudo apt install npm
+> sudo apt install git
+> sudo apt install nodejs
 > sudo npm install -g n
 > sudo n install stable
+> git clone https://github.com/LenDev0406/RFBot
+> cd RFBot
+> npm install
+> npm start
 ```
 
 # Requirements
