@@ -4,15 +4,16 @@ const { getYtMp4 } = require("../lib/downloader")
 
 module.exports =  {
     name: 'ytmp4',
-    usage: 'send /ytmp4 <url youtube>',
-    description: 'Download youtube video',
+    usage: 'kirim /ytmp4 <url youtube>',
+    description: 'Mendownload video dari youtube',
     aliases: ['ytv', 'youtubemp4', 'ytvideo'],
     category: 'Downloader',
     async execute(bot, message, args) {
         const url = args.length !== 0 ? args[0] : ''
+        if (!url) return bot.sendMessage(getChatId(message), "Masukan url!", {reply: getMessageId(message)})
         if (isUrl(url) && url.includes('youtu.be') || url.includes('youtube.com/watch?v=')) {
             const data = await getYtMp4(url)
-            const datateks = `『 Youtube Video 』\n\n➥ *Author*: ${data.author}\n➥ *Title*: ${data.title}\n➥ *Duration*: ${data.duration}\n➥ *Published*: ${data.uploadDate}\n➥ *Views*: ${data.views}\n➥ *Likes*: ${data.likes}\n➥ *Dislikes*: ${data.dislikes}\n\n*Please wait, video will be sending soon!*`
+            const datateks = `『 Youtube Video 』\n\n➥ *Uploader*: ${data.author}\n➥ *Judul*: ${data.title}\n➥ *Durasi*: ${data.duration}\n➥ *Published*: ${data.uploadDate}\n➥ *Views*: ${data.views}\n➥ *Likes*: ${data.likes}\n➥ *Dislikes*: ${data.dislikes}\n\n*Mohon bersabar, video akan segera dikirim!*`
             await bot.sendPhoto(getChatId(message), data.thumbnails, {
                 serverDownload: true,
                 reply: getMessageId(message),
@@ -24,10 +25,10 @@ module.exports =  {
                 serverDownload: true,
                 reply: getMessageId(message),
                 fileName: data.title,
-                caption: "Here's the video"
+                caption: "Nih videonya"
             })
         } else {
-            bot.sendMessage(getChatId(message), "That's not a youtube link!", {
+            bot.sendMessage(getChatId(message), "Itu bukan link youtube!", {
                 reply: getMessageId(message)
             })
         }

@@ -28,7 +28,6 @@ bot.on('*', async (message) => {
     const args = body.trim().split(/ +/).slice(prefix.length)
     const isCmd = body.startsWith(prefix)
     const cmds = commands.get(commandName) || commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
-
     if (!isCmd) return
     if (!cmds) return
     if (message.from.is_bot) return

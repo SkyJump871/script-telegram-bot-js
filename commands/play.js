@@ -4,14 +4,14 @@ const { searchYoutubeMusic } = require("../lib/search")
 module.exports = {
     name: 'play',
     aliases: ['ytplay', 'ytmusic', 'music'],
-    usage: 'send /play <title song>',
-    description: 'Search music from youtube and download the audio',
+    usage: 'kirim /play <judul musik>',
+    description: 'Mencari musik dan mendownload musik tersebut dari youtube',
     category: 'Media',
     async execute(bot, message, args) {
         const title = args.join(" ")
         if (title) {
             const data = await searchYoutubeMusic(title)
-            const datateks = `『 Youtube Music 』\n\n➥ *Uploader*: ${data.author}\n➥ *Title*: ${data.title}\n➥ *Duration*: ${data.duration}\n➥ *Published*: ${data.uploadDate}\n➥ *Views*: ${data.views}\n➥ *Likes*: ${data.likes}\n➥ *Dislikes*: ${data.dislikes}\n\n*Please wait, audio will be sending soon!*`
+            const datateks = `『 Youtube Music 』\n\n➥ *Uploader*: ${data.author}\n➥ *Title*: ${data.title}\n➥ *Duration*: ${data.duration}\n➥ *Published*: ${data.uploadDate}\n➥ *Views*: ${data.views}\n➥ *Likes*: ${data.likes}\n➥ *Dislikes*: ${data.dislikes}\n\n*Mohon bersabar, audio akan segera dikirim!*`
             await bot.sendPhoto(getChatId(message), data.thumbnail, {
                 caption: datateks,
                 reply: getMessageId(message),

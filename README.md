@@ -9,8 +9,8 @@
 > sudo apt install nodejs
 > sudo npm install -g n
 > sudo n install stable
-> git clone https://github.com/LenDev0406/RFBot
-> cd RFBot
+> git clone https://github.com/LenDev0406/script-telegram-bot-js
+> cd script-telegram-bot-js
 > npm install
 > npm start
 ```

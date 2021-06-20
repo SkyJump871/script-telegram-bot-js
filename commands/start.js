@@ -2,11 +2,12 @@ const { getChatId, getMessageId, getUsername } = require("../function/get")
 
 module.exports = {
     name: 'start',
-    usage: 'send /start',
-    description: 'First Commands to Start Bot',
+    usage: 'kirim /start',
+    description: 'Perintah pertama saat ingin menggunakan bot',
     category: 'Bot',
     execute(bot, message, args) {
-        bot.sendMessage(getChatId(message), `Hello *${getUsername(message)}*\nWelcome to *RF* *Bot*\nsend /menu for check all features in RF Bot`, {
+        const teks = `Halo ${getUsername(message)}\nSelamat datang di *Rf* *Bot*.\nKirim /menu atau /help.\nUntuk mendapatkan informasi lebih lanjut!`
+        bot.sendMessage(getChatId(message), teks, {
             reply: getMessageId(message),
             parseMode: 'markdown'
         })
