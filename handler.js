@@ -5,9 +5,13 @@ const config = require('./config.json')
 const { color, filter } = require('./function')
 const { isGroup } = require('./function/validator')
 const { getChatId, getFromId, getMessageId, getUsername, getTitleGroup } = require('./function/get')
+const afk = require('./function/afk')
 const bot = new Telebot({
     token: config.token
 })
+
+// Database Reader
+const _afk = JSON.parse(fs.readFileSync('./database/afk.json'))
 
 // Handling Commands Files
 let commands = new Extra();
@@ -28,9 +32,11 @@ bot.on('*', async (message) => {
     const args = body.trim().split(/ +/).slice(prefix.length)
     const isCmd = body.startsWith(prefix)
     const cmds = commands.get(commandName) || commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
+
+    // Validator
+    if (message.from.is_bot) return
     if (!isCmd) return
     if (!cmds) return
-    if (message.from.is_bot) return
 
     // Cooldowns
     if (isCmd && filter.isFiltered(getFromId(message)) && !isGroup(message)) {
