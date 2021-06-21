@@ -9,10 +9,34 @@
 > sudo apt install nodejs
 > sudo npm install -g n
 > sudo n install stable
-> git clone https://github.com/LenDev0406/script-telegram-bot-js
+> git clone https://github.com/LenDev0406/script-telegram-bot-js.git
 > cd script-telegram-bot-js
 > npm install
 > npm start
+```
+
+## Change token
+
+Untuk pengguna Komputer / Desktop
+
+```json
+{
+    "prefix": "/",
+    "token": "token:kalian",
+    "ownerUsername": "usernamelu"
+}
+```
+
+Untuk pengguna Termux / Mobile User
+
+```bash
+cd script-telegram-bot-js
+> nano config.json
+```
+
+```txt
+Atau agar lebih mudah silahkan fork repository ini
+dan edit config.json untuk mengubah token atau username
 ```
 
 # Requirements
@@ -34,7 +58,7 @@
 | Is | question | is | are |
 | Say | words | say | repeat |
 
-| Searcher | Parameter | Command | Aliases |
+| Search | Parameter | Command | Aliases |
 | :------: | :-------: | :-----: | :-----: |
 | Youtube Music | title | play | ytmusic, ytplay, music |
 
